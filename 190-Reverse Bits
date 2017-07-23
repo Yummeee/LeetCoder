@@ -1,0 +1,11 @@
+public class Solution {
+    // you need treat n as an unsigned value
+    public int reverseBits(int c) {
+     	 c = ( c & 0x55555555 ) << 1 | ( c & 0xAAAAAAAA ) >>> 1;
+	     c = ( c & 0x33333333 ) << 2 | ( c & 0xCCCCCCCC ) >>> 2;
+	     c = ( c & 0x0F0F0F0F ) << 4 | ( c & 0xF0F0F0F0 ) >>> 4;
+	     c = ( c & 0x00FF00FF ) << 8 | ( c & 0xFF00FF00 ) >>> 8;
+	     c = ( c & 0x0000FFFF ) << 16 | ( c & 0xFFFF0000 ) >>> 16;
+	     return c;
+    }
+}
