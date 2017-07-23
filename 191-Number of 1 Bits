@@ -1,0 +1,11 @@
+public class Solution {
+    // you need to treat n as an unsigned value
+    public int hammingWeight(int data) {
+        data = (data & 0x55555555) + ((data >> 1) & 0x55555555);
+	      data = (data & 0x33333333) + ((data >> 2) & 0x33333333);
+		    data = (data & 0x0f0f0f0f) + ((data >> 4) & 0x0f0f0f0f);
+	    	data = (data & 0x00ff00ff) + ((data >> 8) & 0x00ff00ff);
+		    data = (data & 0x0000ffff) + ((data >> 16) & 0x0000ffff);
+	      return data;
+    }
+}
