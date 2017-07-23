@@ -1,0 +1,13 @@
+package Solution476;
+
+class Solution476 {
+	public int solution476(int num) {
+		num = ~num;
+		int mask = (Integer.highestOneBit(num)<<1)-1;
+		return num&mask;
+	}
+	public static void main(String args[]) {
+		Solution476 test = new Solution476();
+		System.out.println(test.solution476(1));
+	}
+}
