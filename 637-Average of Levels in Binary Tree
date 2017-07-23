@@ -1,0 +1,51 @@
+package Solution637;
+import java.util.*;
+
+class TreeNode {
+	int val;
+	TreeNode left;
+	TreeNode right;
+	TreeNode(int x) { val = x; }
+}
+public class Solution637 {
+	public static List < Double > averageOfLevels(TreeNode root) {
+		List < Double > average = new ArrayList < > ();
+		Queue < TreeNode > queue = new LinkedList < > ();
+		queue.add(root);
+		
+		while (!queue.isEmpty()) {
+			double sum = 0; 
+			double count = 0;
+			Queue < TreeNode > temp = new LinkedList < > ();
+			while(!queue.isEmpty()){
+				TreeNode t = queue.remove();
+				sum = sum + t.val;
+				count++;
+				if (t.left != null)
+					temp.add(t.left);
+				if (t.right != null)
+					temp.add(t.right);
+			}
+			queue = temp;
+			average.add(sum / count);
+		}
+		return average;		
+	}
+	
+	public static void main(String args[]) {
+		TreeNode t1 = new TreeNode(4);
+		TreeNode t11 = new TreeNode(2);
+		TreeNode t12 = new TreeNode(6);
+		TreeNode t111 = new TreeNode(3);
+		TreeNode t112 = new TreeNode(5);
+		TreeNode t122 = new TreeNode(7);
+		t1.left = t11;
+		t1.right = t12;
+		t11.left = t111;
+		t11.right = t112;
+		t12.right = t122;
+		
+		List < Double > average = averageOfLevels(t1);
+		System.out.println(average);
+	}
+}
