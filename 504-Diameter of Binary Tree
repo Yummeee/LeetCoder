@@ -1,0 +1,69 @@
+package Solution543;
+import java.util.Stack; 
+
+class TreeNode {
+	int val; 
+	TreeNode left;
+	TreeNode right;
+	TreeNode(int x) {
+		val = x;
+	}
+}
+
+class Solution543 {
+	public static int maxDepth(TreeNode root) {
+		if(root == null)
+			return 0;
+		int left = maxDepth(root.left);
+	    int right = maxDepth(root.right);
+	    return (left>right)? left+1:right+1;
+	}
+ 
+	public static int diameterOfBinaryTree(TreeNode root) {
+		if(root == null)
+			return 0;
+		int  depthLeft= 0;
+		int depthRight = 0;
+		int maxDepth = 0;
+		Stack <TreeNode> stack = new Stack <TreeNode> ();
+		stack.push(root);
+		
+		while(!stack.isEmpty()) {
+			TreeNode p = stack.pop();
+			if((p.left != null) & (p.right != null)) {
+				stack.push(p.left); 
+				stack.push(p.right);
+				depthLeft = maxDepth(p.left);
+			//	System.out.println(depthLeft);
+				depthRight = maxDepth(p.right);
+			//	System.out.println(depthRight);
+				if ((depthLeft+depthRight) > maxDepth)	
+					maxDepth = depthLeft+depthRight;
+			}
+			if((p.left != null) & (p.right == null)) {
+				stack.push(p.left); 
+				depthLeft = maxDepth(p.left);
+			//	System.out.println(depthLeft);
+				if ((depthLeft) > maxDepth)	
+					maxDepth = depthLeft;
+			}
+			if((p.left == null) & (p.right != null) ){
+				stack.push(p.right); 
+				depthRight = maxDepth(p.right);
+			//	System.out.println(depthRight);
+				if ((depthRight) > maxDepth)	
+					maxDepth = depthRight;
+			}
+			else ;	
+        }
+        return maxDepth;
+	}
+	public static void main(String args[]) {
+		TreeNode t = new TreeNode(1);
+		TreeNode t1 = new TreeNode(2);
+	//	TreeNode t12 = new TreeNode(2);
+		t.right= t1;
+	//	t1.right = t12;
+		System.out.println(diameterOfBinaryTree(t));
+	}
+}
